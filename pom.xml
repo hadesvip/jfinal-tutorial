@@ -11,6 +11,9 @@
     <properties>
         <jdk.version>1.8</jdk.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <jfinal.version>2.2</jfinal.version>
+        <jetty-version>9.3.12.v20160915</jetty-version>
+        <jfinal.server-version>8.1.8</jfinal.server-version>
     </properties>
 
     <dependencies>
@@ -19,6 +22,18 @@
             <artifactId>junit</artifactId>
             <version>3.8.1</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal</artifactId>
+            <version>${jfinal.version}</version>
+        </dependency>
+        <!--注意：jetty-server是jfinal的，不是jetty的-->
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jetty-server</artifactId>
+            <version>${jfinal.server-version}</version>
+            <!--<scope>provided</scope>-->
         </dependency>
     </dependencies>
     <build>
@@ -33,7 +48,17 @@
                     <target>${jdk.version}</target>
                 </configuration>
             </plugin>
-
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty-version}</version>
+                <configuration>
+                    <scanIntervalSeconds>10</scanIntervalSeconds>
+                    <webApp>
+                        <contextPath>/</contextPath>
+                    </webApp>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>
