@@ -1,5 +1,7 @@
 package com.controller;
 
+import com.interceptor.BlogInterceptor;
+import com.jfinal.aop.Before;
 import com.jfinal.core.Controller;
 
 /**
@@ -8,12 +10,18 @@ import com.jfinal.core.Controller;
 public class SysController extends Controller {
 
 
+    @Before(BlogInterceptor.class)
     public void index() {
         renderText("hello,jfinal...");
     }
 
 
-    public void home(){
-        renderText("hello ,home...");
+    public void home() {
+
+        String userName = this.getPara("userName");
+
+        System.out.println("[userName ]-->" + userName);
+
+        renderJson("{'words':'hello,jfinal!'}");
     }
 }

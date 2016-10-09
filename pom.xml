@@ -14,7 +14,18 @@
         <jfinal.version>2.2</jfinal.version>
         <jetty-version>9.3.12.v20160915</jetty-version>
         <jfinal.server-version>8.1.8</jfinal.server-version>
+        <druid-version>1.0.24</druid-version>
+        <mysql.version>5.1.39</mysql.version>
     </properties>
+
+    <repositories>
+        <!--阿里私服-->
+        <repository>
+            <id>aliyun</id>
+            <name>aliyun</name>
+            <url>http://maven.aliyun.com/nexus/content/groups/public/</url>
+        </repository>
+    </repositories>
 
     <dependencies>
         <dependency>
@@ -35,6 +46,20 @@
             <version>${jfinal.server-version}</version>
             <!--<scope>provided</scope>-->
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>${druid-version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>${mysql.version}</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>jfinal-tutorial</finalName>
