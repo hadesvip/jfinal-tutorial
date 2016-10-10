@@ -12,7 +12,9 @@ public class SysController extends Controller {
 
     @Before(BlogInterceptor.class)
     public void index() {
-        renderText("hello,jfinal...");
+
+        setAttr("title", "首页");
+        render("index.html");
     }
 
 

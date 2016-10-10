@@ -26,6 +26,10 @@ public class AppConfig extends JFinalConfig {
     public void configConstant(Constants constants) {
         constants.setDevMode(true);
 
+        // freemarker
+        constants.setBaseViewPath("/WEB-INF/template");
+        constants.setFreeMarkerViewExtension(".html");
+
         //加载配置文件
         PropKit.use("app.properties");
     }
