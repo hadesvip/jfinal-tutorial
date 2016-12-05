@@ -1,29 +1,20 @@
 package com.controller;
 
-import com.interceptor.BlogInterceptor;
-import com.jfinal.aop.Before;
-import com.jfinal.core.Controller;
+import com.base.BaseController;
+import com.jfinal.ext.route.ControllerBind;
 
 /**
+ * 系统配置
  * Created by wangyong on 2016/10/7.
  */
-public class SysController extends Controller {
 
+@ControllerBind(controllerKey = "/sys", viewPath = "/WEB-INF/template/sys")
+public class SysController extends BaseController {
 
-    @Before(BlogInterceptor.class)
     public void index() {
 
-        setAttr("title", "首页");
-        render("index.html");
+        render("index");
     }
 
 
-    public void home() {
-
-        String userName = this.getPara("userName");
-
-        System.out.println("[userName ]-->" + userName);
-
-        renderJson("{'words':'hello,jfinal!'}");
-    }
 }

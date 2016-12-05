@@ -15,8 +15,8 @@
         <jetty-version>9.3.12.v20160915</jetty-version>
         <jfinal.server-version>8.1.8</jfinal.server-version>
         <druid-version>1.0.24</druid-version>
-        <mysql.version>5.1.39</mysql.version>
         <freemarker.version>2.3.20</freemarker.version>
+        <mariadb.version>1.5.5</mariadb.version>
     </properties>
 
     <repositories>
@@ -40,6 +40,20 @@
             <artifactId>jfinal</artifactId>
             <version>${jfinal.version}</version>
         </dependency>
+
+        <!--jfinal第三方依赖包-->
+        <dependency>
+            <groupId>com.jfinal</groupId>
+            <artifactId>jfinal-ext</artifactId>
+            <version>3.1.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>19.0</version>
+        </dependency>
+
         <!--注意：jetty-server是jfinal的，不是jetty的-->
         <dependency>
             <groupId>com.jfinal</groupId>
@@ -55,9 +69,9 @@
         </dependency>
 
         <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-            <version>${mysql.version}</version>
+            <groupId>org.mariadb.jdbc</groupId>
+            <artifactId>mariadb-java-client</artifactId>
+            <version>${mariadb.version}</version>
         </dependency>
 
         <!--freemarker-->
@@ -78,17 +92,6 @@
                 <configuration>
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.eclipse.jetty</groupId>
-                <artifactId>jetty-maven-plugin</artifactId>
-                <version>${jetty-version}</version>
-                <configuration>
-                    <scanIntervalSeconds>10</scanIntervalSeconds>
-                    <webApp>
-                        <contextPath>/</contextPath>
-                    </webApp>
                 </configuration>
             </plugin>
         </plugins>

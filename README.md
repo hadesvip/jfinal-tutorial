@@ -3,7 +3,7 @@
 ### 技术点
 * 服务端 jfinal
 * 前端:bootstrap + angularjs1.x + freemarker
-* 数据库: mysql
+* 数据库: mariadb
 * 中间件: redis
 
 
