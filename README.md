@@ -6,4 +6,7 @@
 * 数据库: mariadb
 * 中间件: redis
 
+## 参考资料
+1. jfinal-ext https://github.com/b1412/jfinal-ext/blob/master/doc/doc.org
+2. jfinal-ext2 http://git.oschina.net/brucezcq/JFinal-ext2
 
