@@ -8,5 +8,7 @@
 
 ## 参考资料
 1. jfinal-ext https://github.com/b1412/jfinal-ext/blob/master/doc/doc.org
-2. jfinal-ext2 http://git.oschina.net/brucezcq/JFinal-ext2
+2. jfinal-ext2
 
+    http://git.oschina.net/brucezcq/JFinal-ext2
+    https://my.oschina.net/brucezcq/blog/598270
