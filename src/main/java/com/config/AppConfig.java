@@ -1,10 +1,13 @@
 package com.config;
 
+import com.controller.IndexController;
 import com.jfinal.config.*;
+import com.jfinal.ext.handler.ContextPathHandler;
 import com.jfinal.ext.interceptor.ExceptionInterceptor;
 import com.jfinal.ext.plugin.sqlinxml.SqlInXmlPlugin;
 import com.jfinal.ext.plugin.tablebind.AutoTableBindPlugin;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
+import com.jfinal.ext.route.AutoBindRoutes;
 import com.jfinal.kit.PropKit;
 import com.jfinal.plugin.druid.DruidPlugin;
 
@@ -26,7 +29,7 @@ public class AppConfig extends JFinalConfig {
         constants.setDevMode(true);
 
         // freemarker
-        constants.setBaseViewPath("/WEB-INF/template");
+        constants.setBaseViewPath("/WEB-INF/template/");
         constants.setFreeMarkerViewExtension(".html");
 
         //加载配置文件
@@ -40,7 +43,8 @@ public class AppConfig extends JFinalConfig {
      */
     @Override
     public void configRoute(Routes routes) {
-        //routes.add(new AutoBindRoutes());
+        routes.add(new AutoBindRoutes());
+//        routes.add("/", IndexController.class);
     }
 
     /**
@@ -76,8 +80,7 @@ public class AppConfig extends JFinalConfig {
         //统一异常处理
         ExceptionInterceptor exceptionInterceptor = new ExceptionInterceptor();
         //exceptionInterceptor.addMapping(NullPointerException.class,"");
-        exceptionInterceptor.setDefault("系统异常");
-
+        exceptionInterceptor.setDefault("/exception");
         interceptors.add(exceptionInterceptor);
 
     }
@@ -85,7 +88,7 @@ public class AppConfig extends JFinalConfig {
 
     @Override
     public void configHandler(Handlers handlers) {
-
+        handlers.add(new ContextPathHandler("baseUrl"));
     }
 
 }

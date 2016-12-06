@@ -39,13 +39,31 @@
             <groupId>com.jfinal</groupId>
             <artifactId>jfinal</artifactId>
             <version>${jfinal.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse.jetty.orbit</groupId>
+                    <artifactId>javax.servlet</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.eclipse.jetty.orbit</groupId>
+            <artifactId>javax.servlet</artifactId>
+            <version>3.0.0.v201112011016</version>
+            <scope>provided</scope>
         </dependency>
 
+
         <!--jfinal第三方依赖包-->
+        <!--  <dependency>
+              <groupId>com.jfinal</groupId>
+              <artifactId>jfinal-ext</artifactId>
+              <version>3.1.2</version>
+          </dependency>-->
         <dependency>
             <groupId>com.jfinal</groupId>
-            <artifactId>jfinal-ext</artifactId>
-            <version>3.1.2</version>
+            <artifactId>jfinal-ext2</artifactId>
+            <version>2.0.2</version>
         </dependency>
 
         <dependency>

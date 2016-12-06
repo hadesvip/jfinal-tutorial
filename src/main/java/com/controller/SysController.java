@@ -8,12 +8,12 @@ import com.jfinal.ext.route.ControllerBind;
  * Created by wangyong on 2016/10/7.
  */
 
-@ControllerBind(controllerKey = "/sys", viewPath = "/WEB-INF/template/sys")
+@ControllerBind(controllerKey = "/sys", viewPath = "sys")
 public class SysController extends BaseController {
 
     public void index() {
 
-        render("index");
+        render("index.html");
     }
 
 
