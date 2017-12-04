@@ -1,5 +1,3 @@
-<sqlGroup name="sysconfig" >
-      <sql id="findSysconfig">
-        select * from sys_config
-      </sql>
-</sqlGroup>
+# sql (findAdminUserList)
+  select * from PX_ADMINUSER where userName=?
+#end

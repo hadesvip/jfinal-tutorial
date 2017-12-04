@@ -8,8 +8,14 @@ import com.jfinal.ext.plugin.sqlinxml.SqlInXmlPlugin;
 import com.jfinal.ext.plugin.tablebind.AutoTableBindPlugin;
 import com.jfinal.ext.plugin.tablebind.SimpleNameStyles;
 import com.jfinal.ext.route.AutoBindRoutes;
+import com.jfinal.kit.PathKit;
 import com.jfinal.kit.PropKit;
+import com.jfinal.plugin.activerecord.ActiveRecordPlugin;
+import com.jfinal.plugin.activerecord.CaseInsensitiveContainerFactory;
+import com.jfinal.plugin.activerecord.dialect.Dialect;
+import com.jfinal.plugin.activerecord.dialect.OracleDialect;
 import com.jfinal.plugin.druid.DruidPlugin;
+import com.jfinal.template.Engine;
 
 /**
  * jfinal 启动配置
@@ -26,14 +32,11 @@ public class AppConfig extends JFinalConfig {
      */
     @Override
     public void configConstant(Constants constants) {
-        constants.setDevMode(true);
 
-        // freemarker
-        constants.setBaseViewPath("/WEB-INF/template/");
-        constants.setFreeMarkerViewExtension(".html");
-
-        //加载配置文件
         PropKit.use("app.properties");
+
+        constants.setDevMode(PropKit.getBoolean("devMode", false));
+
     }
 
     /**
@@ -47,6 +50,11 @@ public class AppConfig extends JFinalConfig {
 //        routes.add("/", IndexController.class);
     }
 
+    @Override
+    public void configEngine(Engine engine) {
+
+    }
+
     /**
      * 插件
      *
@@ -55,17 +63,28 @@ public class AppConfig extends JFinalConfig {
     @Override
     public void configPlugin(Plugins plugins) {
 
+        loadPropertyFile("jdbc.properties");
+
         // druid
         DruidPlugin druidPlugin = new DruidPlugin(PropKit.get("jdbc.url"), PropKit.get("jdbc.username"), PropKit.get("jdbc.password"));
+        druidPlugin.setDriverClass("oracle.jdbc.driver.OracleDriver");
 
         //自动绑定表跟model的插件
-        AutoTableBindPlugin autoTableBindPlugin = new AutoTableBindPlugin(druidPlugin, SimpleNameStyles.LOWER_UNDERLINE);
-        autoTableBindPlugin.setShowSql(true);
-        autoTableBindPlugin.addScanPackages("com.dao.model");
+//        AutoTableBindPlugin autoTableBindPlugin = new AutoTableBindPlugin(druidPlugin, SimpleNameStyles.LOWER_UNDERLINE);
+//        autoTableBindPlugin.setShowSql(true);
+//        autoTableBindPlugin.addScanPackages("com.dao.model");
+
+        ActiveRecordPlugin activeRecordPlugin = new ActiveRecordPlugin(druidPlugin);
+        activeRecordPlugin.setShowSql(true);
+        activeRecordPlugin.setDialect(new OracleDialect());
+        activeRecordPlugin.setContainerFactory(new CaseInsensitiveContainerFactory());
+        activeRecordPlugin.setBaseSqlTemplatePath(PathKit.getRootClassPath());
+        activeRecordPlugin.addSqlTemplate("/sqlMap/config-sql.sql");
 
         plugins.add(druidPlugin);
-        plugins.add(autoTableBindPlugin);
-        plugins.add(new SqlInXmlPlugin());
+        plugins.add(activeRecordPlugin);
+//        plugins.add(autoTableBindPlugin);
+//        plugins.add(new SqlInXmlPlugin());
 
     }
 

@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.base.BaseController;
+import com.jfinal.core.ActionKey;
 import com.jfinal.ext.route.ControllerBind;
 
 /**
@@ -9,6 +10,8 @@ import com.jfinal.ext.route.ControllerBind;
 @ControllerBind(controllerKey = "/", viewPath = "/")
 public class IndexController extends BaseController {
 
+
+    @ActionKey("/index")
     public void index() {
 
         getRequest().setAttribute("user", "admin");
